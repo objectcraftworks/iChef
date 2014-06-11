@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iChef", "iChef\iChef.csproj", "{553081F0-0224-44BB-B71F-32B1E3257326}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iChef.Domain", "iChef.Domain\iChef.Domain.csproj", "{0E8522FA-498D-40DA-86CE-EB4FDA9E19A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iChef.Tests", "iChef.Tests\iChef.Tests.csproj", "{117B1FFC-C046-45D3-AAAA-8BDD54864CE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{553081F0-0224-44BB-B71F-32B1E3257326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553081F0-0224-44BB-B71F-32B1E3257326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553081F0-0224-44BB-B71F-32B1E3257326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553081F0-0224-44BB-B71F-32B1E3257326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E8522FA-498D-40DA-86CE-EB4FDA9E19A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E8522FA-498D-40DA-86CE-EB4FDA9E19A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E8522FA-498D-40DA-86CE-EB4FDA9E19A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E8522FA-498D-40DA-86CE-EB4FDA9E19A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{117B1FFC-C046-45D3-AAAA-8BDD54864CE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{117B1FFC-C046-45D3-AAAA-8BDD54864CE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{117B1FFC-C046-45D3-AAAA-8BDD54864CE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{117B1FFC-C046-45D3-AAAA-8BDD54864CE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
