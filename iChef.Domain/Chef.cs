@@ -1,89 +1,62 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 namespace iChef.Domain
 {
+    public delegate Order ProcessTicket(Menu menu,Ticket ticket);
+
     public class Chef
     {
         readonly Menu _menu;
+        readonly ProcessTicket _processTicket;
 
-        public Chef(Menu menu)
+        public Chef(Menu menu,ProcessTicket processTicket=null)
         {
             _menu = menu;
+            //ProcessTicket could be a strategy if this needs to modified, for now chef provides the default implementation
+            // OCP to extend the processTicket
+            _processTicket = processTicket ?? ProcessTicket;
         }
 
         public Order ProcessOrder(Ticket ticket)
         {
-            var order = new Order();
-            var menuItems = _menu.GetMenuItems(ticket.TimeOfDay);
-            if (menuItems == null)
-            {
-                order.HasError = true;
-                return order;
-            }
+            return  _processTicket(_menu,ticket);
+        }
 
-            var selectionMenuItemMap = from selection in ticket.Dishes 
-                        join menuItem in _menu.GetMenuItems(ticket.TimeOfDay) on selection equals menuItem.DishType into map
-                        from item in map.DefaultIfEmpty()
-                        select new {Selection =selection, MenuItem=item};
-            selectionMenuItemMap = selectionMenuItemMap.ToList();
-           
-            
-            var processedList = new Dictionary<DishType, OrderItem>();
-            foreach (var selectedItem in selectionMenuItemMap)
+        private static Order ProcessTicket(Menu menu,Ticket ticket)
+        {
+            var hasError = false;
+            var processedList = new OrderItemCollection();
+            try
             {
-                if(selectedItem.MenuItem ==null)
+                var menuItems = menu.GetMenuItems(ticket.TimeOfDay);
+                if (menuItems == null)
                 {
-                    order.HasError = true;
-                    break;
+                    throw new Exception(); //for those purists, this could be a custom exception when a story pulls that.... for now YAGNI
                 }
-                if( !CanAddItem(processedList, selectedItem.MenuItem.DishType, selectedItem.MenuItem))
-                {
-                    order.HasError = true;
-                    break;
-                }
-            
-                if (processedList.ContainsKey(selectedItem.Selection))
-                    processedList[selectedItem.Selection].Quantity++;
-                else
-                {
-                    processedList.Add(selectedItem.Selection,
-                                      new OrderItem(selectedItem.Selection, selectedItem.MenuItem.Dish));
-                }
-            }
+                var selectionMenuItemMap = from selection in ticket.Dishes
+                                           join menuItem in menu.GetMenuItems(ticket.TimeOfDay) on selection equals
+                                               menuItem.DishType into map
+                                           from item in map.DefaultIfEmpty()
+                                           select new {Selection = selection, MenuItem = item};
 
-            foreach (var item in processedList)
-            {
-                order.AddItem(item.Value); 
+                foreach (var selectedItem in selectionMenuItemMap.ToList())
+                {
+                    var menuItem = selectedItem.MenuItem;
+                    if (menuItem == null)
+                    {
+                        throw new Exception(); //for those purists, this could be a custom exception when a story pulls that.... for now YAGNI
+                    }
+                    processedList.Add(new OrderItem(selectedItem.Selection, selectedItem.MenuItem.Dish,
+                                                    menuItem.AllowedItems));
+                }
             }
+            catch
+            {
+                hasError = true; //if client needs Error Details, exception could be carried to Order. for now YAGNI.
+            }
+            var order = new Order {HasError = hasError};
+            order.AddItems(processedList.ToList().AsReadOnly());
             return order;
         }
-
-        bool CanAddItem(Dictionary<DishType, OrderItem> processedList,DishType dishType, MenuItem menuItem)
-        {
-            return processedList.Count(i => i.Key == dishType) < menuItem.AllowedItems;
-        }
-
-        public static Ticket CreateTicketFrom(string orderInput)
-        {
-            var split = orderInput.Split(',');
-            var timeOfDay = split[0].Trim().ToLower();
-            
-            List<DishType> dishTypes = new List<DishType>();
-            for (int i = 1; i < split.Length; i++)
-            {
-                int result;
-                if (int.TryParse(split[i].Trim(), out result))
-                {
-                    dishTypes.Add(DishType.GetByCode(result));
-                }
-                else
-                {
-                    dishTypes.Add(DishType.Unknown);
-                }
-            }
-            return new Ticket(timeOfDay, dishTypes);
-
-        }
-
     }
 }

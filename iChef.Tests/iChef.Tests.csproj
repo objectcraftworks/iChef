@@ -52,7 +52,7 @@
     <Compile Include="Given_timeofday_When_Chef_Processes_a_ticket.cs" />
     <Compile Include="TestData\ChefFactory.cs" />
     <Compile Include="Given_dish_selections_in_random_order_When_Chef_Processes_a_ticket.cs" />
-    <Compile Include="Given_invalid_dish_selection_after_valid_selections_When_Chef_Processes_a_ticket.cs" />
+    <Compile Include="Given_invalid_dish_selections_along_with_valid_selections_When_Chef_Processes_a_ticket.cs" />
     <Compile Include="Given_invalid_dish_selection_When_Chef_Processes_a_ticket.cs" />
     <Compile Include="Given_multiple_orders_for_a_dish_that_can_be_ordered_atmost_one_When_Chef_Processes_a_ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 namespace iChef.Domain
 {
     public class Order
     {
-        static OrderItem _errorItem = new OrderItem(DishType.Unknown, new Dish("Error"));
-        readonly List<OrderItem> _items = new List<OrderItem>();
-        
+        static readonly OrderItem ErrorItem = new OrderItem(DishType.Unknown, new Dish("Error"),1);
+        IEnumerable<OrderItem> _items;
         public IEnumerable<OrderItem> Items
         {
             get
@@ -17,14 +18,15 @@ namespace iChef.Domain
                 }
                 if (HasError)
                     // Client could call directly HasEror, or Order returns all the items treating the special condition as a dish type
-                    yield return _errorItem;
+                    yield return ErrorItem;
             }
         }
        
         public bool HasError { get; set; }
-        public void AddItem(OrderItem orderItem)
+
+        public void AddItems(IEnumerable<OrderItem> orderItems)
         {
-            _items.Add(orderItem);
+            _items = orderItems;
         }
     }
 }

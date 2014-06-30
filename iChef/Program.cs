@@ -19,7 +19,7 @@ namespace iChef
                     var orderInput = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(orderInput))
                         break;
-                    var ticket = Chef.CreateTicketFrom(orderInput);
+                    var ticket = Ticket.CreateTicketFrom(orderInput);
                     var order = chef.ProcessOrder(ticket);
                     Console.WriteLine("Output: {0}",
                                       string.Join(",", order.Items.Select(GetDisplayOrderItem)));

@@ -17,10 +17,7 @@ namespace iChef.Tests
                 _order = _sut.ProcessOrder(_ticket);
             };
 
-        It should_allow_multiple_orders_of_item = () =>
-            {
-                _order.Items.ElementAt(0).Quantity.ShouldEqual(2);
-            };
+        It should_allow_multiple_orders_of_item = () => _order.Items.ElementAt(0).Quantity.ShouldEqual(2);
 
                
         static Chef _sut;

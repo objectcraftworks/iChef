@@ -5,7 +5,7 @@ using iChef.Tests.TestData;
 
 namespace iChef.Tests
 {
-    public class Given_invalid_dish_selection_after_valid_selections_When_Chef_Processes_a_ticket
+    public class Given_invalid_dish_selections_along_with_valid_selections_When_Chef_Processes_a_ticket
     {
         private Establish context = () =>
             {
