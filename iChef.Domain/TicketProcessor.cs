@@ -43,11 +43,11 @@ namespace iChef.Domain
         {
             var menuItems = menu.GetMenuItems(ticket.TimeOfDay);
             ThrowIfTimeOfDayIsMissingMenu(menuItems);
-            return (from selection in ticket.Dishes
+            return from selection in ticket.Dishes
                                        join menuItem in menuItems on selection equals
                                            menuItem.DishType into map
                                        from item in map.DefaultIfEmpty()
-                                       select new Map( selection, item));
+                                       select new Map( selection, item);
         }
 
         void ThrowIfTimeOfDayIsMissingMenu(IEnumerable<MenuItem> menuItems)
