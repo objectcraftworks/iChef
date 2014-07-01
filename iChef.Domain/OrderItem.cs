@@ -2,15 +2,14 @@
 {
     public class OrderItem
     {
+        public static readonly OrderItem ErrorItem = new OrderItem(DishType.Unknown, new Dish("Error"));
         readonly DishType _dishType;
         readonly Dish _dish;
-        readonly int _allowedItems;
 
-        public OrderItem(DishType dishType, Dish dish, int allowedItems)
+        public OrderItem(DishType dishType, Dish dish)
         {
             _dishType = dishType;
             _dish = dish;
-            _allowedItems = allowedItems;
             Quantity = 1;
         }
         public int Quantity { get; set; }
@@ -30,9 +29,5 @@
             get { return _dishType; }
         }
 
-        public int AllowedItems
-        {
-            get { return _allowedItems; }
-        }
     }
 }

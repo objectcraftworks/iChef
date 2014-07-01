@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 namespace iChef.Domain
 {
     public class DishType
@@ -24,6 +25,13 @@ namespace iChef.Domain
             var dishTypeList = new[] {Entree, Side, Drink, Desert};
             var dishType = dishTypeList.FirstOrDefault(d => d.Code == code);
             return dishType ?? Unknown;
+        }        public static DishType GetDishTypeFor(string dishCode)
+        {
+            int result;
+            if (Int32.TryParse(dishCode, out result))
+                return GetByCode(result);
+
+            return Unknown;
         }
     }
 }
