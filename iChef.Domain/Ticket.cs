@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 namespace iChef.Domain
 {
@@ -12,8 +11,6 @@ namespace iChef.Domain
             TimeOfDay = timeOfDay;
             Dishes = dishes;
         }
-
-
         public static Ticket CreateTicketFrom(string orderInput)
         {
             var split = orderInput.Split(',');
@@ -21,7 +18,5 @@ namespace iChef.Domain
             var dishTypes = split.Skip(1).Select(DishType.GetDishTypeFor).ToList();
             return new Ticket(timeOfDay, dishTypes);
         }
-
-      
     }
 }

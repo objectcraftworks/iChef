@@ -9,7 +9,7 @@ namespace iChef.Tests.TestData
         {
             var menuItems = new List<MenuItem> {new MenuItem(DishType.Entree,new Dish("Eggs")), new MenuItem( DishType.Side,new Dish("Toast")), new MenuItem(DishType.Drink,new Dish("Coffee"),2)};
             var timeOfDayMenu = new Dictionary<string, IEnumerable<MenuItem>> {{"morning", menuItems}};
-            return new Chef(new Menu(timeOfDayMenu));
+            return new Chef(new Menu(timeOfDayMenu),new TicketProcessor().ProcessTicket);
         }
     }
 }

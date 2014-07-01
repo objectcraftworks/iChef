@@ -49,7 +49,7 @@ namespace iChef
                                                  new MenuItem(DishType.Drink, new Dish("Coffee"), allowedItems:2) };
 
             var timeOfDayMenu = new Dictionary<string, IEnumerable<MenuItem>> { { "morning", morningItems},{"night",nightItems} };
-            return new Chef(new Menu(timeOfDayMenu));
+            return new Chef(new Menu(timeOfDayMenu),new TicketProcessor().ProcessTicket);
         }
     }
 }
