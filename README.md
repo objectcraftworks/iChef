@@ -1,4 +1,5 @@
 #### Code sample demonstrating BDD using Machine.Specifications
+      Demonstrates doing just enough design, following SOLID principles, and YAGNI.
 
 #### Coding Problem
    Build a console application that takes in a time of day and the types of dishes we want to eat, returning the foods to make.
